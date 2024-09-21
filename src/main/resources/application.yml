@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: spring-notification-service
+  mail:
+    host: localhost
+    port: 1025
+    username: admin
+    password: 1234
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enabled: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+  datasource:
+    url: jdbc:postgresql://localhost:5433/notification
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    defer-datasource-initialization: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+server:
+  port: 8090

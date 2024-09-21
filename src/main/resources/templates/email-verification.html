@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Email Verification</title>
+    <style>
+        /* Custom CSS for Email Verification */
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 150px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer Styles */
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="logo">
+        <!--        <img th:src="@{/images/logo.png}" alt="App Logo">-->
+    </div>
+
+    <h1>Email Verification</h1>
+
+    <p>Hello, <span th:text="${userName}">User</span>,</p>
+    <p>Thank you for registering with <strong>Notification Service Application</strong>. Please click the button below
+        to verify your email address.</p>
+
+    <a class="btn" th:href="${verificationUrl}">Verify Email</a>
+
+    <p>If you didn’t create an account with <strong>Notification Service Application</strong>, please ignore this email
+        or contact us at <a href="mailto:support@yourapp.com">support@notify.com</a>.</p>
+
+    <div class="footer">
+        <p>Need help? Contact our <a href="mailto:support@notify.com">support team</a>.</p>
+        <p>&copy; 2024 Notification Service Application. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>
