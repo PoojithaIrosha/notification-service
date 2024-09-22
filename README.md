@@ -89,16 +89,18 @@ notification service into your applications.
 
 1. **Email Verification**:
 
-Integrate the notification service into your application to send email verification messages containing a unique token
-or link.
+   Integrate the notification service into your application to send email verification messages containing a unique
+   token or link.
 
-- Upon user registration, send a notification email with the verification link.
-- Verify the user's email address by processing the token or clicking the link.
+    - Upon user registration, send a notification email with the verification link.
+    - Verify the user's email address by processing the token or clicking the link.
+
 
 2. **Password Reset**:
 
-Implement a password reset flow in your application.
+   Implement a password reset flow in your application.
 
-- Generate a secure random password or allow users to choose a new one.
-- Send a notification **EMAIL / SMS /WHATSAPP MSG** containing the temporary password or a link to reset the password.
-- Allow users to update their password using the temporary password or the provided link.
+    - Generate a secure random password or allow users to choose a new one.
+    - Send a notification **EMAIL / SMS /WHATSAPP MSG** containing the temporary password or a link to reset the
+      password.
+    - Allow users to update their password using the temporary password or the provided link.
