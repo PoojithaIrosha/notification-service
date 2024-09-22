@@ -23,11 +23,15 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: false
+      ddl-auto: create-drop
+    show-sql: true
     defer-datasource-initialization: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:init.sql
 twilio:
   account-sid: ACCOUNT_SID
   auth-token: AUTH_TOKEN
