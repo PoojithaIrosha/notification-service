@@ -34,4 +34,10 @@ public class AuthController {
         return ResponseEntity.ok(resp);
     }
 
+    @PostMapping("forgot-password")
+    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
+        this.authService.forgotPassword(email);
+        return ResponseEntity.ok("Password reset link sent to your email");
+    }
+
 }

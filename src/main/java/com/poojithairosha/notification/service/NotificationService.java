@@ -61,7 +61,7 @@ public class NotificationService {
         var notificationLog = NotificationLog.builder()
                 .notification(notification)
                 .notificationType(type)
-                .toRecipients(String.join(", ", dto.to()))
+                .toRecipients((dto.to() != null) ? String.join(", ", dto.to()) : null)
                 .ccRecipients((dto.cc() != null) ? String.join(", ", dto.cc()) : null)
                 .mobileRecipients((dto.mobileNo() != null) ? String.join(", ", dto.mobileNo()) : null)
                 .status(status)

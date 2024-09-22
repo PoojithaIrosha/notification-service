@@ -28,5 +28,10 @@ spring:
     defer-datasource-initialization: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+twilio:
+  account-sid: ACCOUNT_SID
+  auth-token: AUTH_TOKEN
+  from-number: FROM_NUMBER
+  from-wanumber: whatsapp:FROM_NUMBER
 server:
   port: 8090

@@ -15,17 +15,17 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.util.Map;
 
-@Component
 @Slf4j
+@Component
 @RequiredArgsConstructor
-public class SmsNotification implements INotification {
+public class WhatsappNotification implements INotification {
 
     private final SpringTemplateEngine templateEngine;
     @Value("${twilio.account-sid}")
     private String accountSid;
     @Value("${twilio.auth-token}")
     private String authToken;
-    @Value("${twilio.from-number}")
+    @Value("${twilio.from-wanumber}")
     private String fromNumber;
 
     @PostConstruct
@@ -36,7 +36,7 @@ public class SmsNotification implements INotification {
 
     @Override
     public void sendNotification(NotificationMode notificationMode, NotificationDto notificationDto) {
-        log.info("Sending SMS notification: {}", notificationDto);
+        log.info("Sending Whatsapp notification: {}", notificationDto);
         try {
             Context context = new Context();
             for (Map.Entry<String, Object> entry : notificationDto.additionalParams().entrySet()) {
@@ -45,13 +45,14 @@ public class SmsNotification implements INotification {
 
             String smsContent = templateEngine.process(notificationMode.getTemplateUrl(), context);
             Message message = Message.creator(
-                    new PhoneNumber(notificationDto.mobileNo().get(0)),
+                    new PhoneNumber("whatsapp:" + notificationDto.mobileNo().get(0)),
                     new PhoneNumber(fromNumber),
                     smsContent).create();
-            log.info("SMS notification sent successfully: {}", message.getSid());
+            log.info("Whatsapp notification sent successfully: {}", message.getSid());
         } catch (Exception ex) {
-            log.warn("Failed to send SMS notification", ex);
-            throw new RuntimeException("Failed to send SMS", ex);
+            log.warn("Failed to send Whatsapp notification", ex);
+            throw new RuntimeException("Failed to send Whatsapp", ex);
         }
     }
+
 }

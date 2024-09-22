@@ -50,4 +50,23 @@ public class AuthService {
                 .build();
     }
 
+    public void forgotPassword(String email) {
+        var user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        String verificationCode = String.valueOf((int) ((Math.random() * (999999 - 100000)) + 100000));
+        user.setToken(verificationCode);
+        userRepository.save(user);
+
+        log.info("User verification code is updated");
+
+        var notification = NotificationDto.builder()
+                .to(List.of(user.getEmail()))
+                .mobileNo(List.of("+94762873649"))
+                .additionalParams(
+                        Map.of("userName", user.getName(), "verificationCode", verificationCode)
+                )
+                .build();
+
+        notificationService.sendNotification(notification, "reset-password");
+        log.info("Forgot password notification is sent");
+    }
 }

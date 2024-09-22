@@ -16,6 +16,7 @@ public class NotificationFactory {
 
     private final EmailNotification emailNotification;
     private final SmsNotification smsNotification;
+    private final WhatsappNotification whatsappNotification;
 
     private Map<NotificationType, INotification> notificationMap;
 
@@ -25,6 +26,7 @@ public class NotificationFactory {
         notificationMap = new EnumMap<>(NotificationType.class);
         notificationMap.put(NotificationType.EMAIL, emailNotification);
         notificationMap.put(NotificationType.SMS, smsNotification);
+        notificationMap.put(NotificationType.WHATSAPP, whatsappNotification);
         log.info("END: Initializing Notification Factory");
     }
 
