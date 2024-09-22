@@ -104,3 +104,19 @@ notification service into your applications.
     - Send a notification **EMAIL / SMS /WHATSAPP MSG** containing the temporary password or a link to reset the
       password.
     - Allow users to update their password using the temporary password or the provided link.
+
+## Technologies Used
+
+- Spring Boot
+- Twilio API for SMS and WhatsApp notifications
+- MailDev for local email testing
+- Swagger UI for API documentation
+- Docker Compose for containerized services
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests to improve the project.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
