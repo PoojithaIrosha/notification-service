@@ -17,7 +17,7 @@ spring:
         timeout: 3000
         writetimeout: 5000
   datasource:
-    url: jdbc:postgresql://localhost:5433/notification
+    url: jdbc:postgresql://localhost:5432/notification-service
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: notification-service
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  maildev:
+    image: maildev/maildev
+    container_name: maildev
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
