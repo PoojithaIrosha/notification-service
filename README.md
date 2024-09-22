@@ -87,6 +87,8 @@ notification service into your applications.
 
 ## Example Use Cases
 
+This project supports multiple notification channels: Email, SMS, and WhatsApp.
+
 1. **Email Verification**:
 
    Integrate the notification service into your application to send email verification messages containing a unique
@@ -104,6 +106,28 @@ notification service into your applications.
     - Send a notification **EMAIL / SMS /WHATSAPP MSG** containing the temporary password or a link to reset the
       password.
     - Allow users to update their password using the temporary password or the provided link.
+
+## API Endpoints
+
+![API Endpoints](assets/swagger-api-endpoint.png)
+
+## Sample Notifications
+
+1. **Email Verification Mail Sample**
+
+![Email Verification](assets/email-verification.png)
+
+2. **Reset Passsword Mail Sample**
+
+![Password Reset](assets/reset-password.png)
+
+3. **SMS Notification Sample**
+
+![SMS Notification](assets/sms-log-twilio.png)
+
+4. **WhatsApp Notification Sample**
+
+![Whatsapp Notification](assets/whatsapp-message-example.jpeg)
 
 ## Technologies Used
 
