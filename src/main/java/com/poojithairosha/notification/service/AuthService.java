@@ -66,7 +66,7 @@ public class AuthService {
                 )
                 .build();
 
-        notificationService.sendNotification(notification, "reset-password");
+        notificationService.sendNotification(notification, "forgot-password");
         log.info("Forgot password notification is sent");
     }
 }
