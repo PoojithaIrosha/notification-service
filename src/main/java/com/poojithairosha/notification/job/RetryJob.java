@@ -3,13 +3,11 @@ package com.poojithairosha.notification.job;
 import com.poojithairosha.notification.dto.NotificationDto;
 import com.poojithairosha.notification.entity.NotificationLog;
 import com.poojithairosha.notification.entity.NotificationMode;
-import com.poojithairosha.notification.factory.INotification;
-import com.poojithairosha.notification.factory.NotificationFactory;
 import com.poojithairosha.notification.repository.NotificationLogRepository;
 import com.poojithairosha.notification.repository.NotificationModeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,10 +22,10 @@ import static com.poojithairosha.notification.entity.NotificationStatus.*;
 public class RetryJob {
 
     private final NotificationLogRepository notificationLogRepository;
-    private final NotificationFactory notificationFactory;
     private final NotificationModeRepository notificationModeRepository;
+    private final KafkaTemplate<String, NotificationDto> kafkaTemplate;
 
-    @Scheduled(cron = "${system.cron.notification.retry:0 */2 * * * ?}")
+    // @Scheduled(cron = "${system.cron.notification.retry:0 */2 * * * ?}")
     public void retryFailedNotifications() {
         log.info("Looking for failed notifications");
         List<NotificationLog> failedNotifications = notificationLogRepository.findAllByStatus(PENDING).orElseThrow(() -> new RuntimeException("Failed notifications not found"));
@@ -45,14 +43,15 @@ public class RetryJob {
                         .build();
 
                 NotificationMode systemNotificationType = notificationModeRepository.findByNotification_IdAndNotificationType(notificationLog.getNotification().getId(), notificationLog.getNotificationType()).orElseThrow(() -> new RuntimeException("Notification mode not found"));
+                notificationDto.setSubject(systemNotificationType.getSubject());
+                notificationDto.setNotificationName(systemNotificationType.getNotification().getName());
+                notificationDto.setTemplateUrl(systemNotificationType.getTemplateUrl());
 
                 int attemptCount = notificationLog.getAttempts() + 1;
                 try {
-                    INotification iNotification = notificationFactory.getNotification(systemNotificationType.getNotificationType());
-                    iNotification.sendNotification(systemNotificationType, notificationDto);
+                    kafkaTemplate.send(systemNotificationType.getNotificationType().name().toLowerCase() + "-notification", notificationDto);
                     notificationLog.setStatus(SUCCESS);
-
-                    log.info("Notification sent successfully with details {}", notificationDto.toString());
+                    log.info("Notification sent successfully with details {}", notificationDto);
                 } catch (Exception e) {
                     notificationLog.setStatus(attemptCount < notificationLog.getMaxRetryAttempts() ? PENDING : FAILED);
                     log.error("Error sending failed notification {} attempt {} for id {}: {}", notificationLog.getNotificationType(), notificationLog.getAttempts() + 1, notificationLog.getNotification().getId(), e.getMessage(), e);

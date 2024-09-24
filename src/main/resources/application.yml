@@ -32,6 +32,18 @@ spring:
     init:
       mode: always
       data-locations: classpath:init.sql
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: notification-group
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.json.type.mapping: NotificationDto:com.poojithairosha.notification.dto.NotificationDto
+
 twilio:
   account-sid: ACCOUNT_SID
   auth-token: AUTH_TOKEN

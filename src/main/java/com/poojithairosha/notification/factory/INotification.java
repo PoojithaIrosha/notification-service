@@ -1,10 +1,11 @@
 package com.poojithairosha.notification.factory;
 
 import com.poojithairosha.notification.dto.NotificationDto;
-import com.poojithairosha.notification.entity.NotificationMode;
+
+import java.util.concurrent.CompletableFuture;
 
 public interface INotification {
 
-    void sendNotification(NotificationMode notificationMode, NotificationDto notificationDto);
+    CompletableFuture<Void> sendNotification(NotificationDto notificationDto);
 
 }

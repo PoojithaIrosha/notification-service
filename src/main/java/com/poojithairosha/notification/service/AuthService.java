@@ -28,13 +28,14 @@ public class AuthService {
         var user = userService.saveUser(userRequestDto);
         String verifyUrl = "http://localhost:8090/api/v1/auth/verify?token=" + user.getToken();
         var notification = NotificationDto.builder()
+                .notificationName("email-verification")
                 .to(List.of(user.getEmail()))
                 .additionalParams(
                         Map.of("userName", user.getName(), "verificationUrl", verifyUrl)
                 )
                 .build();
+        notificationService.sendNotification(notification);
 
-        notificationService.sendNotification(notification, "email-verification");
         log.info("Email verification notification is sent");
         return UserMapper.mapToDto(user);
     }
@@ -59,6 +60,7 @@ public class AuthService {
         log.info("User verification code is updated");
 
         var notification = NotificationDto.builder()
+                .notificationName("forgot-password")
                 .to(List.of(user.getEmail()))
                 .mobileNo(List.of("+94762873649"))
                 .additionalParams(
@@ -66,7 +68,7 @@ public class AuthService {
                 )
                 .build();
 
-        notificationService.sendNotification(notification, "forgot-password");
+        notificationService.sendNotification(notification);
         log.info("Forgot password notification is sent");
     }
 }
