@@ -1,9 +1,7 @@
-# Spring Boot Notification Service
+Notification Service – Spring Boot Microservice
 
-This Spring Boot application provides a robust notification system capable of sending **emails, SMS, and WhatsApp
-messages**. It also includes functionalities for email verification and password reset, demonstrating how to integrate
-the
-notification service into your applications.
+A modular notification microservice designed to deliver multi-channel communication
+across distributed systems using Email, SMS, and WhatsApp.
 
 ## Features:
 
