@@ -1,4 +1,4 @@
-Notification Service – Spring Boot Microservice
+# Notification Service – Spring Boot Microservice
 
 A modular notification microservice designed to deliver multi-channel communication
 across distributed systems using Email, SMS, and WhatsApp.
